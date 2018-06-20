@@ -1,4 +1,6 @@
 
+import java.net.URL;
+import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -15,11 +17,17 @@ import javax.swing.JOptionPane;
  */
 public class Acceso extends javax.swing.JFrame {
 
+    String ruta = "";
+    URL url = null;
+    ImageIcon icon = null;
+    
     /**
      * Creates new form Acceso
      */
     public Acceso() {
         initComponents();
+        
+       
     }
 
     /**
@@ -34,6 +42,11 @@ public class Acceso extends javax.swing.JFrame {
         lblOpcion = new javax.swing.JLabel();
         jcbOpciones = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jlista = new javax.swing.JList<>();
+        btnLista = new javax.swing.JButton();
+        btnEliminar = new javax.swing.JButton();
+        btnLimpiar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(204, 204, 255));
@@ -42,7 +55,7 @@ public class Acceso extends javax.swing.JFrame {
 
         lblOpcion.setBackground(new java.awt.Color(255, 204, 204));
         lblOpcion.setFont(new java.awt.Font("Tempus Sans ITC", 0, 14)); // NOI18N
-        getContentPane().add(lblOpcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 90, 140, 100));
+        getContentPane().add(lblOpcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 90, 220, 100));
 
         jcbOpciones.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Apple", "Grapes", "Kiwi", "Cherry" }));
         jcbOpciones.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -57,7 +70,40 @@ public class Acceso extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Tempus Sans ITC", 1, 36)); // NOI18N
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/canasta.png"))); // NOI18N
         jLabel1.setText("Fruits!");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 10, 200, 50));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 10, 200, 50));
+
+        jlista.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "Opcion 1", "Opcion 2", "Opcion 3", "Opcion 4", "Opcion 5" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        jScrollPane1.setViewportView(jlista);
+
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 60, 150, 150));
+
+        btnLista.setText("Opcion");
+        btnLista.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnListaActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnLista, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 230, -1, -1));
+
+        btnEliminar.setText("Eliminar");
+        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 280, -1, -1));
+
+        btnLimpiar.setText("Limpiar");
+        btnLimpiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLimpiarActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnLimpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 280, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -65,46 +111,81 @@ public class Acceso extends javax.swing.JFrame {
     private void jcbOpcionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbOpcionesActionPerformed
         // TODO add your handling code here:
        int op= jcbOpciones.getSelectedIndex();
+       String cadena = jcbOpciones.getSelectedItem().toString();
          
        switch (op) {
           
-           case 0: JOptionPane.showMessageDialog(null,
-                   "Numero 1",
-                   "Opcion Seleccionada",
-                   JOptionPane.INFORMATION_MESSAGE);
-                   lblOpcion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/apple.png")));
+           case 0: mostrarImagen("/img/apple.png", op+1, cadena);
              
+                break;
+                
+           case 1: mostrarImagen("/img/grapes.png", op+1, cadena);
                 
                 break;
                 
-           case 1: JOptionPane.showMessageDialog(null,
-                   "Numero 2",
-                   "Opcion Seleccionada",
-                   JOptionPane.INFORMATION_MESSAGE);
-                 lblOpcion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/grapes.png")));
+           case 2: mostrarImagen("/img/kiwi.png", op+1, cadena);
                 
                 break;
                 
-           case 2: JOptionPane.showMessageDialog(null,
-                   "Numero 3",
-                   "Opcion Seleccionada",
-                   JOptionPane.INFORMATION_MESSAGE);
-                 lblOpcion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/kiwi.png")));
+           case 3: mostrarImagen("/img/cherry.png", op+1, cadena);
                 
                 break;
                 
-           case 3: JOptionPane.showMessageDialog(null,
-                   "Numero 4",
-                   "Opcion Seleccionada",
-                   JOptionPane.INFORMATION_MESSAGE);
-                 lblOpcion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/cherry.png")));
-                
-                break;
+           default:
+               throw new AssertionError();
                
        }
         
     }//GEN-LAST:event_jcbOpcionesActionPerformed
 
+    private void btnListaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListaActionPerformed
+        // TODO add your handling code here:
+        int opc= jlista.getSelectedIndex();
+        
+        switch (opc) {
+            case -1: JOptionPane.showMessageDialog(null,
+                                                   "No ha seleccionado Nada",
+                                                   "Mensaje",
+                                                   JOptionPane.WARNING_MESSAGE);
+            
+            break;
+            
+            case 0:
+            case 1:
+            case 2:
+            case 3:
+            case 4: mostrarCuadro(opc+1);
+            
+            break;
+        
+        }
+    }//GEN-LAST:event_btnListaActionPerformed
+
+    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
+        // TODO add your handling code here:
+        
+        eliminar();
+        
+    }//GEN-LAST:event_btnEliminarActionPerformed
+
+    private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnLimpiarActionPerformed
+
+    public void mostrarCuadro(int op){
+        JOptionPane.showMessageDialog(null,
+                        "Opción No:"+ op,
+                        "Opción Seleccionada",
+                        JOptionPane.INFORMATION_MESSAGE);
+    }
+    
+    public void limpiar(){
+        
+    }
+    public void eliminar(){
+        int pos = jlista.getSelectedIndex();
+        jlista.remove(this);
+    }
     /**
      * @param args the command line arguments
      */
@@ -139,10 +220,24 @@ public class Acceso extends javax.swing.JFrame {
             }
         });
     }
+    
+    public void mostrarImagen(String urlImagen, 
+                                     int opcion,
+                                     String cad){
+        url = this.getClass().getResource(urlImagen);
+        icon = new ImageIcon(url);
+        lblOpcion.setIcon(icon);
+        lblOpcion.setText("Opcion: " + opcion + " Texto: " + cad);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnEliminar;
+    private javax.swing.JButton btnLimpiar;
+    private javax.swing.JButton btnLista;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JComboBox<String> jcbOpciones;
+    private javax.swing.JList<String> jlista;
     private javax.swing.JLabel lblOpcion;
     // End of variables declaration//GEN-END:variables
 }
