@@ -461,6 +461,7 @@ public class helados extends javax.swing.JFrame {
         
         t.setVisible(true);
 
+        this.dispose();
     }//GEN-LAST:event_btnTicketActionPerformed
 
     private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed

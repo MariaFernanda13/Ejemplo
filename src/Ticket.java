@@ -1,5 +1,11 @@
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
+import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -110,8 +116,9 @@ public class Ticket extends javax.swing.JFrame {
         lblTotal = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         lblFecha = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        btnRegresar = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
+        btnGuardar = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
 
@@ -155,14 +162,21 @@ public class Ticket extends javax.swing.JFrame {
         jLabel10.setFont(new java.awt.Font("Comic Sans MS", 1, 12)); // NOI18N
         jLabel10.setText("Fecha:");
 
-        jButton1.setText("REGRESAR");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnRegresar.setText("REGRESAR");
+        btnRegresar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnRegresarActionPerformed(evt);
             }
         });
 
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/helado.png"))); // NOI18N
+
+        btnGuardar.setText("GUARDAR");
+        btnGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGuardarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -171,26 +185,26 @@ public class Ticket extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(27, 27, 27)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addGap(43, 43, 43)
-                                .addComponent(lblTopping, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(23, 23, 23)
-                                .addComponent(lblSubtotal, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel10)
-                                .addGap(121, 121, 121)
-                                .addComponent(lblFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addGap(41, 41, 41)
-                                .addComponent(lblTexto, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGap(27, 27, 27)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jLabel1)
+                                        .addGap(43, 43, 43)
+                                        .addComponent(lblTopping, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(23, 23, 23)
+                                        .addComponent(lblSubtotal, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jLabel10)
+                                        .addGap(121, 121, 121)
+                                        .addComponent(lblFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jLabel2)
+                                        .addGap(41, 41, 41)
+                                        .addComponent(lblTexto, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE))))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(28, 28, 28)
                                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -200,42 +214,46 @@ public class Ticket extends javax.swing.JFrame {
                                 .addGap(28, 28, 28)
                                 .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(23, 23, 23)
-                                .addComponent(lblTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(85, 85, 85)
-                                .addComponent(btnMostrar)
-                                .addGap(39, 39, 39)
-                                .addComponent(jButton1)))
+                                .addComponent(lblTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 12, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnGuardar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnMostrar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(70, 88, Short.MAX_VALUE))
+                        .addComponent(btnRegresar)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(28, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel10)
-                    .addComponent(lblFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(16, 16, 16)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2)
+                .addContainerGap(48, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(lblFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(lblTexto, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(3, 3, 3)
-                        .addComponent(lblTexto, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(6, 6, 6)
+                        .addComponent(jLabel10)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel2)
+                        .addGap(21, 21, 21)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1)
                     .addComponent(lblTopping, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(9, 9, 9)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel4)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(1, 1, 1)
-                        .addComponent(lblSubtotal, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(11, 11, 11)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(9, 9, 9)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel4)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(1, 1, 1)
+                                .addComponent(lblSubtotal, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(11, 11, 11)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel5)
                             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -247,16 +265,19 @@ public class Ticket extends javax.swing.JFrame {
                                 .addGap(3, 3, 3)
                                 .addComponent(jLabel6))
                             .addComponent(lblTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(31, 31, 31)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnRegresar)
                             .addComponent(btnMostrar)
-                            .addComponent(jButton1)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(1, 1, 1)
-                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(btnGuardar))
+                        .addGap(20, 20, 20))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(19, 19, 19))))
         );
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 510, 250));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 510, 280));
 
         jPanel2.setBackground(new java.awt.Color(204, 204, 255));
 
@@ -297,13 +318,48 @@ public class Ticket extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnMostrarActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
         // TODO add your handling code here:
         helados h = new helados();
         h.setVisible(true);
+        
+        this.dispose();
 
 
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnRegresarActionPerformed
+
+    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
+        // TODO add your handling code here:
+        
+         JFileChooser archivo = new JFileChooser();
+
+        File a = archivo.getSelectedFile();
+
+        FileNameExtensionFilter filtro = new FileNameExtensionFilter("Archivo de Texto", "txt");
+
+        archivo.setFileFilter(filtro);
+
+        int opcion = archivo.showSaveDialog(this);
+
+        if (opcion == JFileChooser.APPROVE_OPTION) {
+
+            try {
+                BufferedWriter bw = new BufferedWriter(new FileWriter(archivo.getSelectedFile().getAbsolutePath())); //Indicamos que vamos a guardar el archivo que se esta seleccionando en esta memori temporal
+                bw.write(lblFecha.getText()+ " \n ");
+                bw.write(lblTexto.getText()+ " \n ");
+                bw.write(lblTopping.getText()+ " \n ");
+                bw.write(lblSubtotal.getText()+ " \n ");
+                bw.write(lblIva.getText()+ " \n ");
+                bw.write(lblTotal.getText()+ " \n ");
+                bw.close();
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        
+    }//GEN-LAST:event_btnGuardarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -341,8 +397,9 @@ public class Ticket extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnGuardar;
     private javax.swing.JButton btnMostrar;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btnRegresar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
