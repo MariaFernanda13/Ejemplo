@@ -9,7 +9,9 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author Alumno
+ * @author Pacheco Angeles Maria Fernanda
+ * TIC03SM-17
+ * 25-JUNIO-2018
  */
 public class MenuPrincipal extends javax.swing.JFrame {
 

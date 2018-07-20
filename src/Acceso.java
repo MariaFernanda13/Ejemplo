@@ -13,7 +13,10 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author Alumno
+ * @author Pacheco Angeles Maria Fernanda
+ * TIC03SM-17
+ * 25-JUNIO-2018
+ * 
  */
 public class Acceso extends javax.swing.JFrame {
 
@@ -164,12 +167,17 @@ public class Acceso extends javax.swing.JFrame {
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
         // TODO add your handling code here:
         
-        eliminar();
+        int eliminar = jlista.getSelectedIndex();
+       
+        jcbOpciones.remove(eliminar);
         
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
         // TODO add your handling code here:
+        
+         jlista.removeAll();
+        
     }//GEN-LAST:event_btnLimpiarActionPerformed
 
     public void mostrarCuadro(int op){

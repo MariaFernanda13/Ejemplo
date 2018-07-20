@@ -6,6 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
+import javax.swing.ImageIcon;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 /*
@@ -15,7 +16,9 @@ import javax.swing.filechooser.FileNameExtensionFilter;
  */
 /**
  *
- * @author Pacheco Angeles Maria Fernanda TIC03SM-17 25/JUNIO/2017
+ * @author Pacheco Angeles Maria Fernanda 
+ * TIC03SM-17 
+ * 25/JUNIO/2018
  */
 public class Notas extends javax.swing.JFrame {
 
@@ -138,7 +141,8 @@ public class Notas extends javax.swing.JFrame {
 
         //String aux = "";
         String texto = "";
-
+        
+        
         JFileChooser archivo = new JFileChooser();
 
         File a = archivo.getSelectedFile();
@@ -155,6 +159,8 @@ public class Notas extends javax.swing.JFrame {
                 while (sc.hasNext()) { //Para que la variable obtenga lo que hay en el archivo
                     texto = sc.nextLine(); //Para que la variable siga onteniendo las sig lineas
                     txtaTexto.append(texto + "\n"); //Para que el texto del archivo respete los saltos de linea
+             
+                
                 }
                 sc.close();
             } catch (FileNotFoundException e) {

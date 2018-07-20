@@ -16,7 +16,8 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 /**
  *
  * @author Pacheco Angeles Maria Fernanda
- * 19 de Junio de 2017
+ * TIC03SM-17
+ * 19 de Junio de 2018
  */
 public class Ticket extends javax.swing.JFrame {
 

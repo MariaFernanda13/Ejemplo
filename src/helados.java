@@ -11,7 +11,8 @@ import javax.swing.JOptionPane;
 /**
  *
  * @author Pacheco Angeles Maria Fernanda 
- * 19 de Junio de 2017
+ * TIC03SM-17
+ * 19 de Junio de 2018
  */
 public class helados extends javax.swing.JFrame {
 
